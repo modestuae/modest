@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Modest UAE | Free Business Setup Consultation</title>
+    <meta name="description" content="Talk to a Modest UAE consultant today. Get a free consultation for company formation, PRO services, and corporate tax in Dubai.">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Modest UAE",
+      "image": "https://www.modest.ae/images/logo.webp",
+      "telephone": "+97142524686",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Dubai",
+        "addressCountry": "AE"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+97142524686",
+        "contactType": "customer support",
+        "availableLanguage": ["English", "Arabic"]
+      }
+    }
+    </script>
+</head>
+<body>
+
+    <header id="site-header">
+        <div class="container nav-container">
+            <a href="/" class="logo"><img src="images/Modest-logo.webp" alt="Modest UAE Logo"></a>
+            <nav class="nav-links">
+                <a href="/">Home</a>
+                <div class="dropdown"><a href="/services">Services</a></div>
+                <a href="/about">About</a>
+                <a href="/blog">Blog</a>
+                <a href="/faq">FAQ</a>
+                <a href="/contact" style="color: var(--brand-red);">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <span class="phone-number">Call Us: (04) 252 4686</span>
+            </div>
+            <button class="mobile-toggle" id="mobile-toggle">☰</button>
+        </div>
+    </header>
+
+    <section class="contact-header section-spacing bg-secondary center">
+        <div class="container">
+            <span class="tag">Get in touch</span>
+            <h1>Talk to a Modest UAE consultant today</h1>
+            <p class="subtitle">Fill the form, call, or WhatsApp us — we reply within 1 business hour.</p>
+        </div>
+    </section>
+
+    <section class="quick-actions">
+        <div class="container contact-cards-grid">
+            <a href="tel:+97142524686" class="contact-action-card hover-3d">
+                <div class="icon">📞</div>
+                <h3>Call Us</h3>
+                <p>(04) 252 4686</p>
+                <span class="action-text">Tap to call →</span>
+            </a>
+            <a href="https://wa.me/971501234567?text=Hi,%20I%20need%20help%20with%20business%20setup" target="_blank" class="contact-action-card hover-3d">
+                <div class="icon" style="color:#25D366;">💬</div>
+                <h3>WhatsApp</h3>
+                <p>Instant reply</p>
+                <span class="action-text">Start chat →</span>
+            </a>
+            <a href="mailto:info@modest.ae" class="contact-action-card hover-3d">
+                <div class="icon">✉️</div>
+                <h3>Email Us</h3>
+                <p>info@modest.ae</p>
+                <span class="action-text">Send email →</span>
+            </a>
+            <a href="#" class="contact-action-card hover-3d">
+                <div class="icon">📅</div>
+                <h3>Book a Call</h3>
+                <p>Pick a time slot</p>
+                <span class="action-text">Open calendar →</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="contact-split section-spacing">
+        <div class="container hero-grid">
+            
+            <div class="form-container">
+                <h2>Send us a message</h2>
+                
+                <div id="form-success" class="form-success-state" style="display: none;">
+                    <div class="icon">✅</div>
+                    <h3>Enquiry Sent Successfully!</h3>
+                    <p>Thank you for reaching out. One of our consultants will contact you within 1 business hour.</p>
+                </div>
+
+                <form id="contact-form" action="#" method="POST">
+                    
+                    <div class="input-group">
+                        <label for="fullName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" name="fullName" required placeholder="John Doe">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="phone">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+971 50 123 4567">
+                        </div>
+                        <div class="input-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>What do you need help with? <span class="required">*</span></label>
+                        <div class="service-pills">
+                            <label class="pill-radio"><input type="radio" name="service" value="Formation" required><span>Company Formation</span></label>
+                            <label class="pill-radio"><input type="radio" name="service" value="PRO"><span>PRO Services</span></label>
+                            <label class="pill-radio"><input type="radio" name="service" value="Tax"><span>VAT & Accounting</span></label>
+                            <label class="pill-radio"><input type="radio" name="service" value="Liquidation"><span>Liquidation</span></label>
+                            <label class="pill-radio"><input type="radio" name="service" value="Amendments"><span>Amendments</span></label>
+                            <label class="pill-radio"><input type="radio" name="service" value="Other"><span>Other</span></label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="message">Message (Optional)</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Tell us briefly about your business..."></textarea>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <label for="consent">I agree to be contacted by Modest UAE regarding my enquiry.</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">Submit Enquiry</button>
+                    <p class="helper-text center mt-2">⚡ We typically reply within 1 business hour</p>
+                </form>
+            </div>
+
+            <div class="office-info">
+                <div class="info-card">
+                    <h3>Dubai Office</h3>
+                    <ul class="contact-details-list">
+                        <li><strong>📍 Address:</strong> Office 405, Business Bay, Dubai, UAE</li>
+                        <li><strong>📞 Phone:</strong> (04) 252 4686</li>
+                        <li><strong>✉️ Email:</strong> info@modest.ae</li>
+                        <li><strong>🕒 Hours:</strong> Mon - Fri, 9:00 AM - 6:00 PM</li>
+                    </ul>
+                    
+                    <div class="wa-callout bg-secondary mt-4">
+                        <h4>Need immediate answers?</h4>
+                        <p>Our WhatsApp line is monitored directly by senior consultants, not bots.</p>
+                        <a href="https://wa.me/971501234567" class="btn btn-outline wa-btn mt-2">Message on WhatsApp</a>
+                    </div>
+                </div>
+
+                <div class="map-container mt-4">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115606.31502447196!2d55.195287262499996!3d25.07628045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai!5e0!3m2!1sen!2sae!4v1700000000000!5m2!1sen!2sae" width="100%" height="250" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-faq section-spacing bg-secondary">
+        <div class="container center">
+            <span class="tag">Not sure?</span>
+            <h2>Common questions before reaching out</h2>
+            <div class="faq-accordion mt-4" style="max-width: 800px; margin: 0 auto; text-align: left;">
+                <div class="faq-item">
+                    <button class="faq-question">Is the consultation really free? <span class="arrow">▼</span></button>
+                    <div class="faq-answer"><p>Yes. The first 30-minute consultation is 100% free with no obligation. We use this time to understand your needs and recommend the right license structure.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Can I get a price estimate before booking a call? <span class="arrow">▼</span></button>
+                    <div class="faq-answer"><p>Absolutely. If you know exactly what license and visa quota you need, simply email us your requirements or select your service in the form above, and we will send a direct quotation.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">...</footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

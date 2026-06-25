@@ -14,29 +14,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. FAQ Accordion Logic
     const faqItems = document.querySelectorAll('.faq-item');
-    
     faqItems.forEach(item => {
         const questionButton = item.querySelector('.faq-question');
-        
         questionButton.addEventListener('click', () => {
-            // Close all other open items
             faqItems.forEach(otherItem => {
                 if (otherItem !== item && otherItem.classList.contains('active')) {
                     otherItem.classList.remove('active');
                 }
             });
-            
-            // Toggle current item
             item.classList.toggle('active');
         });
     });
 
-    // 3. Mobile Menu Toggle (Basic Implementation)
+    // 3. Mobile Menu Toggle
     const mobileToggle = document.getElementById('mobile-toggle');
     const navLinks = document.querySelector('.nav-links');
     
     mobileToggle.addEventListener('click', () => {
-        // Toggle logic for mobile menu display
         if(navLinks.style.display === 'flex') {
             navLinks.style.display = 'none';
         } else {
@@ -50,5 +44,62 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.style.padding = '20px';
             navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
         }
+    });
+
+    // 4. Handle Dropdowns on Mobile
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 992) {
+                e.preventDefault(); 
+                const dropdownMenu = this.nextElementSibling;
+                if (dropdownMenu.style.display === 'block') {
+                    dropdownMenu.style.display = 'none';
+                    this.querySelector('.caret').style.transform = 'rotate(0deg)';
+                } else {
+                    dropdownMenu.style.display = 'block';
+                    this.querySelector('.caret').style.transform = 'rotate(180deg)';
+                }
+            }
+        });
+    });
+
+    // 5. Contact Form Submission (Simulated)
+    const contactForm = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            contactForm.style.opacity = '0';
+            setTimeout(() => {
+                contactForm.style.display = 'none';
+                formSuccess.style.display = 'block';
+                formSuccess.style.opacity = '0';
+                setTimeout(() => { formSuccess.style.transition = 'opacity 0.5s ease'; formSuccess.style.opacity = '1'; }, 50);
+            }, 300); 
+        });
+    }
+
+    // 6. Advanced Scroll Reveal Animations (The new effect)
+    const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+    const revealOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const revealObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                return;
+            } else {
+                entry.target.classList.add('reveal-active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, revealOptions);
+
+    revealElements.forEach(el => {
+        revealObserver.observe(el);
     });
 });
