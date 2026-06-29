@@ -543,16 +543,54 @@ p { margin-bottom: 1rem; }
 /* Keep grid layout but hide the right column slot (image is now bg) */
 .hero .hero-grid {
     grid-template-columns: 1fr;
-    max-width: 700px;
+    max-width: 620px;
+    margin-left: 0;
+    margin-right: auto;
+    padding: 60px 0;
+}
+
+.hero .hero-content {
+    text-align: left;
+    align-items: flex-start;
+    padding: 20px 40px 20px 0;
+}
+
+/* Ensure the container inside hero starts from the left */
+.hero .container {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 5%;
 }
 
 @media (max-width: 992px) {
     .hero {
         min-height: 420px;
+        background-image: url('../images/banner1.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+    /* Overlay for mobile bg image */
+    .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to right,
+            rgba(9, 14, 45, 0.82) 0%,
+            rgba(9, 14, 45, 0.45) 100%
+        );
+        z-index: 1;
+    }
+    .hero .container {
+        position: relative;
+        z-index: 2;
+    }
+    /* Hide the absolute image on mobile, use CSS background instead */
+    .hero .hero-image {
+        display: none;
     }
     /* Override the mobile rule that reorders hero columns */
     .hero .hero-content { order: unset; }
-    .hero .hero-image { order: unset; }
 }
 
 /* ==========================================================================
@@ -1456,4 +1494,119 @@ input:focus, textarea:focus {
     .mega-menu-grid {
         grid-template-columns: 1fr;
     }
+}
+
+
+/* ==========================================================================
+   HOMEPAGE — NEW SECTION STYLES
+   ========================================================================== */
+
+/* About snippet stats row */
+.stats-row {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin: 25px 0 30px;
+}
+.stat-item {
+    display: flex;
+    flex-direction: column;
+}
+.stat-item strong {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--brand-navy);
+    line-height: 1;
+}
+.stat-item span {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Why Choose Us */
+.why-choose .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+}
+.why-list ul {
+    list-style: none;
+    margin-top: 15px;
+}
+.why-list ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(9, 14, 45, 0.06);
+    font-weight: 500;
+    color: var(--text-body);
+}
+
+/* Reviews Section */
+.review-stats {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 10px;
+    font-weight: 600;
+    color: var(--brand-navy);
+}
+.reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 40px;
+}
+.review-card {
+    background: #FFF;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    border-top: 4px solid var(--brand-navy);
+}
+.review-card p {
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-h2);
+    margin-bottom: 15px;
+}
+.review-card cite {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-style: normal;
+}
+
+/* Service icon inside card */
+.service-icon {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Footer social links */
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+.social-links a {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+}
+.social-links a:hover { color: var(--brand-red); }
+
+.business-hours {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+@media (max-width: 992px) {
+    .why-choose .why-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .stats-row { gap: 20px; }
 }
