@@ -23,6 +23,18 @@
     --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+
+
+/* ADD THIS TO THE VERY BOTTOM OF styles.css */
+/* EMERGENCY FIX: Force content to be visible */
+.reveal-up, .reveal-left, .reveal-right {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+
+
+
 /* ==========================================================================
    RESET & TYPOGRAPHY
    ========================================================================== */
