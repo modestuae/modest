@@ -1807,6 +1807,58 @@ input:focus, textarea:focus {
     align-items: start;
 }
 
+/* Zigzag rows */
+.zigzag-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.zigzag-row--reverse {
+    direction: rtl;
+}
+
+.zigzag-row--reverse > * {
+    direction: ltr;
+}
+
+.zigzag-image img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(9, 14, 45, 0.14);
+    display: block;
+    object-fit: cover;
+}
+
+.zigzag-content h3 {
+    font-size: 20px;
+    color: var(--brand-navy);
+    margin-bottom: 20px;
+}
+
+.why-list-ul {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+}
+
+.why-list-ul li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(9, 14, 45, 0.07);
+    font-weight: 500;
+    color: var(--text-body);
+    transition: color 0.2s;
+}
+
+.why-list-ul li:last-child {
+    border-bottom: none;
+}
+
 /* Left column: reasons list */
 .why-list h3 {
     font-size: 20px;
@@ -1988,6 +2040,14 @@ input:focus, textarea:focus {
 
 @media (max-width: 992px) {
     .why-choose .why-grid { grid-template-columns: 1fr; }
+    .zigzag-row,
+    .zigzag-row--reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        gap: 30px;
+        margin-top: 40px;
+    }
+    .zigzag-row--reverse .zigzag-image { order: -1; }
     .why-stats-panel { grid-template-columns: 1fr 1fr; }
     .reviews-grid { grid-template-columns: 1fr; }
     .stats-row { gap: 20px; }
