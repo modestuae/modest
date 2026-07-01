@@ -325,7 +325,7 @@
 }
 .cf-benefits__img-wrapper img {
     width: 100%;
-    height: 580px;
+    height: 480px;
     object-fit: cover;
     display: block;
     transition: transform 0.7s ease;
@@ -562,43 +562,109 @@
    ========================================================================== */
 .cf-features__grid {
     display: grid;
-    grid-template-columns: 0.75fr 1fr;
+    grid-template-columns: 1fr 0.75fr;  /* content left, image right */
     gap: 70px;
-    align-items: start;
+    align-items: stretch;  /* both columns stretch to same height */
 }
 
-.cf-features__img-wrapper {
+/* ── Two-image stacked column ──────────────────────────────── */
+.cf-features__image {
+    display: flex;          /* needed so the stack can fill full height */
+}
+
+.cf-features__img-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+    flex: 1;                /* fill the full column height */
+}
+
+/* Shared card base */
+.cf-features__img-card {
     position: relative;
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 30px 70px rgba(9,14,45,0.2);
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.6s ease;
+    will-change: transform;
+    flex: 1;                /* each card takes equal share of stack height */
+    min-height: 0;          /* prevents flex overflow */
 }
-.cf-features__img-wrapper img {
+
+/* Primary card — larger, slight left tilt */
+.cf-features__img-card--primary {
+    transform: perspective(900px) rotateY(5deg) rotateX(-2deg);
+    box-shadow: -12px 24px 60px rgba(9,14,45,0.22),
+                0 0 0 1px rgba(255,255,255,0.06);
+}
+.cf-features__img-card--primary:hover {
+    transform: perspective(900px) rotateY(2deg) rotateX(0deg) scale(1.02);
+    box-shadow: -6px 32px 80px rgba(9,14,45,0.28),
+                0 0 30px rgba(216,12,20,0.12);
+}
+
+/* Secondary card — smaller, slight right tilt, offset left */
+.cf-features__img-card--secondary {
+    transform: perspective(900px) rotateY(-4deg) rotateX(2deg);
+    box-shadow: 12px 20px 50px rgba(9,14,45,0.18),
+                0 0 0 1px rgba(255,255,255,0.06);
+    margin-left: 30px;   /* visual offset for depth */
+}
+.cf-features__img-card--secondary:hover {
+    transform: perspective(900px) rotateY(-1deg) rotateX(0deg) scale(1.02);
+    box-shadow: 6px 28px 70px rgba(9,14,45,0.24),
+                0 0 30px rgba(216,12,20,0.1);
+}
+
+/* Glowing border ring on hover */
+.cf-features__img-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, rgba(216,12,20,0.4), rgba(9,14,45,0.2)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+    pointer-events: none;
+}
+.cf-features__img-card:hover::before { opacity: 1; }
+
+.cf-features__img-card img {
     width: 100%;
-    height: 100%;
-    min-height: 560px;
-    object-fit: cover;
+    height: 100%;           /* fill the full card height */
     display: block;
+    object-fit: cover;
     transition: transform 0.7s ease;
 }
-.cf-features__img-wrapper:hover img { transform: scale(1.04); }
+.cf-features__img-card--primary img { height: 100%; }   /* override removed */
+.cf-features__img-card--secondary img { height: 100%; } /* override removed */
+.cf-features__img-card:hover img { transform: scale(1.05); }
 
+/* Gradient overlay + stat chip */
 .cf-features__img-overlay {
     position: absolute;
     bottom: 0;
     left: 0; right: 0;
-    background: linear-gradient(to top, rgba(9,14,45,0.85) 0%, transparent 100%);
-    padding: 30px;
+    background: linear-gradient(to top, rgba(9,14,45,0.88) 0%, transparent 100%);
+    padding: 24px 28px;
+    z-index: 1;
 }
 .cf-features__overlay-stat strong {
     display: block;
-    font-size: 40px;
+    font-size: 36px;
     font-weight: 800;
     color: #fff;
     line-height: 1;
 }
 .cf-features__overlay-stat span {
-    font-size: 14px;
+    font-size: 13px;
     color: rgba(255,255,255,0.65);
     font-weight: 500;
 }
@@ -857,9 +923,9 @@
    ========================================================================== */
 .cf-docs__grid {
     display: grid;
-    grid-template-columns: 1fr 0.75fr;
-    gap: 70px;
-    align-items: start;
+    grid-template-columns: 1fr 0.9fr;   /* slightly wider image column */
+    gap: 60px;
+    align-items: stretch;               /* both columns same height */
 }
 
 .cf-docs__content h2 { margin-bottom: 20px; }
@@ -901,33 +967,113 @@
     padding-left: 20px;
 }
 
-.cf-docs__img-wrapper {
-    position: relative;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 24px 60px rgba(9,14,45,0.15);
+/* ── Image column — two stacked cards ─────────────────────── */
+.cf-docs__image {
+    display: flex;
 }
-.cf-docs__img-wrapper img {
+
+.cf-docs__img-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    flex: 1;
+}
+
+/* Shared card base */
+.cf-docs__img-card {
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    flex: 1;
+    min-height: 0;
+    will-change: transform;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+                box-shadow 0.6s ease;
+}
+
+/* Glowing ring on hover */
+.cf-docs__img-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, rgba(216,12,20,0.45), rgba(9,14,45,0.2)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+    pointer-events: none;
+}
+.cf-docs__img-card:hover::before { opacity: 1; }
+
+/* Top card — tilts left */
+.cf-docs__img-card--top {
+    transform: perspective(900px) rotateY(-5deg) rotateX(2deg);
+    box-shadow: -14px 22px 55px rgba(9,14,45,0.22),
+                0 0 0 1px rgba(255,255,255,0.05);
+}
+.cf-docs__img-card--top:hover {
+    transform: perspective(900px) rotateY(-2deg) rotateX(0deg) scale(1.02);
+    box-shadow: -6px 30px 70px rgba(9,14,45,0.28),
+                0 0 28px rgba(216,12,20,0.12);
+}
+
+/* Bottom card — tilts right, offset slightly */
+.cf-docs__img-card--bottom {
+    transform: perspective(900px) rotateY(5deg) rotateX(-2deg);
+    box-shadow: 14px 20px 50px rgba(9,14,45,0.2),
+                0 0 0 1px rgba(255,255,255,0.05);
+    margin-right: 24px;   /* right-side offset for visual depth contrast */
+}
+.cf-docs__img-card--bottom:hover {
+    transform: perspective(900px) rotateY(2deg) rotateX(0deg) scale(1.02);
+    box-shadow: 6px 28px 65px rgba(9,14,45,0.26),
+                0 0 28px rgba(216,12,20,0.1);
+}
+
+.cf-docs__img-card img {
     width: 100%;
-    height: 380px;
+    height: 100%;
     object-fit: cover;
     display: block;
     transition: transform 0.7s ease;
 }
-.cf-docs__img-wrapper:hover img { transform: scale(1.04); }
+.cf-docs__img-card:hover img { transform: scale(1.05); }
 
+/* Small label chip on top card */
+.cf-docs__img-label {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(9,14,45,0.75);
+    backdrop-filter: blur(8px);
+    color: rgba(255,255,255,0.9);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+    z-index: 3;
+}
+
+/* Help CTA box on bottom card */
 .cf-docs__help-box {
     position: absolute;
     bottom: 0; left: 0; right: 0;
     background: linear-gradient(to top, rgba(9,14,45,0.95) 0%, transparent 100%);
-    padding: 30px 24px 24px;
+    padding: 30px 24px 22px;
     text-align: center;
+    z-index: 3;
 }
-.cf-docs__help-box span { font-size: 36px; display: block; margin-bottom: 8px; }
+.cf-docs__help-box span { font-size: 32px; display: block; margin-bottom: 8px; }
 .cf-docs__help-box p {
     color: rgba(255,255,255,0.8);
-    font-size: 14px;
-    margin-bottom: 16px;
+    font-size: 13px;
+    margin-bottom: 14px;
     line-height: 1.5;
 }
 
@@ -1087,14 +1233,51 @@
 
     .cf-types__cards { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
 
-    .cf-features__grid { grid-template-columns: 1fr; }
-    .cf-features__image { display: none; }
+    .cf-features__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    /* On tablet/mobile, image column drops below content */
+    .cf-features__image {
+        display: flex;
+    }
+    .cf-features__img-stack {
+        flex-direction: row;   /* side-by-side on tablet */
+        gap: 16px;
+        height: 220px;         /* fixed height so both cards are equal */
+    }
+    .cf-features__img-card--primary {
+        transform: perspective(600px) rotateY(3deg);
+        flex: 1;
+    }
+    .cf-features__img-card--secondary {
+        transform: perspective(600px) rotateY(-3deg);
+        flex: 1;
+        margin-left: 0;        /* remove desktop offset */
+    }
+    .cf-features__img-card--primary img { height: 100%; }
+    .cf-features__img-card--secondary img { height: 100%; }
 
     .cf-reviews__layout { grid-template-columns: 1fr; }
     .cf-reviews__cards { grid-template-columns: 1fr 1fr; }
 
-    .cf-docs__grid { grid-template-columns: 1fr; }
-    .cf-docs__image { display: none; }
+    .cf-docs__grid { grid-template-columns: 1fr; gap: 36px; }
+    .cf-docs__image { display: flex; }
+    .cf-docs__img-stack {
+        flex-direction: row;
+        gap: 14px;
+        height: 230px;
+    }
+    .cf-docs__img-card--top {
+        transform: perspective(600px) rotateY(-3deg);
+        margin-right: 0;
+        flex: 1;
+    }
+    .cf-docs__img-card--bottom {
+        transform: perspective(600px) rotateY(3deg);
+        margin-right: 0;
+        flex: 1;
+    }
 
     .cf-faq__grid { grid-template-columns: 1fr; }
 
@@ -1117,4 +1300,26 @@
     .cf-type-card h3, .cf-type-card p, .cf-type-card__covers,
     .cf-type-card__cost, .cf-type-card .btn { padding-left: 20px; padding-right: 20px; }
     .cf-type-card .btn { margin-left: 20px; margin-right: 20px; }
+
+    /* Stack images vertically on small phones */
+    .cf-features__img-stack { flex-direction: column; gap: 16px; height: auto; }
+    .cf-features__img-card--primary,
+    .cf-features__img-card--secondary {
+        transform: perspective(600px) rotateY(0deg);
+        margin-left: 0;
+        flex: none;            /* remove flex grow so fixed heights apply */
+    }
+    .cf-features__img-card--primary img { height: 200px; }
+    .cf-features__img-card--secondary img { height: 200px; }
+
+    /* Docs images — vertical stack on phones */
+    .cf-docs__img-stack { flex-direction: column; gap: 14px; height: auto; }
+    .cf-docs__img-card--top,
+    .cf-docs__img-card--bottom {
+        transform: none;
+        margin-right: 0;
+        flex: none;
+    }
+    .cf-docs__img-card--top img,
+    .cf-docs__img-card--bottom img { height: 200px; }
 }

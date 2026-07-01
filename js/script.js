@@ -1,4 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    // ── Service Page Hero — stat counter animation ─────────────────────────
+    // Runs only when .cf-hero__stat-num[data-target] elements are present.
+    // Copy-paste safe: works on every service page that uses this markup.
+    const heroCounters = document.querySelectorAll('.cf-hero__stat-num[data-target]');
+    if (heroCounters.length) {
+        const heroCountObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const target = parseInt(el.getAttribute('data-target'), 10);
+                let current = 0;
+                const increment = Math.ceil(target / 60);
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) { current = target; clearInterval(timer); }
+                    el.textContent = current;
+                }, 25);
+                obs.unobserve(el);
+            });
+        }, { threshold: 0.5 });
+        heroCounters.forEach(c => heroCountObserver.observe(c));
+    }
+    // ───────────────────────────────────────────────────────────────────────
     
     // 1. Sticky Header Scroll Effect
     const header = document.getElementById('site-header');
