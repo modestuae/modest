@@ -2153,12 +2153,25 @@ input:focus, textarea:focus {
     gap: 10px;
     margin-top: 10px;
 }
+
 .social-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     color: var(--text-muted);
     font-size: 14px;
     font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
-.social-links a:hover { color: var(--brand-red); }
+
+.social-links a i {
+    font-size: 16px;
+}
+
+.social-links a:hover {
+    color: var(--brand-red);
+}
 
 .business-hours {
     font-size: 13px;
